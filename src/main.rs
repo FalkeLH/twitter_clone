@@ -1,7 +1,9 @@
+use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
+#[derive(Debug, Serialize, Deserialize)]
 struct Tweet {
-    contents: String
+    contents: String,
 }
 
 impl Display for Tweet {
@@ -11,6 +13,10 @@ impl Display for Tweet {
 }
 
 fn main() {
-    let tweet = Tweet { contents: String::from("Hello, World!") };
+    let tweet = Tweet {
+        contents: String::from("Hello, World!"),
+    };
+    let serialized_tweet = serde_json::to_string(&tweet).unwrap();
     println!("{}", tweet);
+    println!("{}", serialized_tweet);
 }
